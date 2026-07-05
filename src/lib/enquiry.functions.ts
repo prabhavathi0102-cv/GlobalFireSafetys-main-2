@@ -52,8 +52,8 @@ async function getAccessToken(): Promise<string> {
   const now = Math.floor(Date.now() / 1000);
   if (cachedToken && cachedToken.exp - 60 > now) return cachedToken.token;
 
-  const clientEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const privateKeyPem = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY;
+  const clientEmail = "lovable-service@sonorous-dragon-501510-a8.iam.gserviceaccount.com";
+  const privateKeyPem = "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDWZufRuygfT/JV\nsYRaxyccWa8cdI6KEwHfYXXf65cRtzOl5MdgfUBohBVsjAu5F76pjMzFIZtIuS4j\n7U18kxvFLg5k2ygZNx0Ig2wLHnrcOy5Jj5FsVqJofAbMO4Pv7eicZ6SKtWDYrU2c\n19Am+wzpNV2LOQcXBCek7WfOIyN+xBG+s6TwGuKaIpAzU4Seo+RtKB69I8ZG99ST\nC9daNUlbp/NC/KfdqZotN58fGka0y2oOsZhciPmSwoHFdWuTrF1azS0Fb+BvG8vv\nyTD5Y6EwD5VXgB6YxJxdTsns6Qn3dX703aNFezrk9AXmoE7KQvN3pOwGEgcCvztj\ndXVwBTMPAgMBAAECggEADW04AvOLBtxNVfN+JpHb5P5yz7/hi0u3GCOfgPcyfeVb\nV9NqGaSjth02GuxG8apHLOazONHVdSpE9Z1Z9xK0BaxQMh24DE2IxRc3MBe9DvH/\n1eh77W0cJ5nuHQ0fF+qYthlsKFRFLTHmhIt5WW+VtpG6espb+M4wTgz2ArvtmvW+\nt1LYbVicitzcSqnYebSSeazLF9LuD6Bk9OmsEkHnNwF4R5AzZJ0/X6xXWWk28uVy\ng9BDM/nzHK6xEyGQA4B4dO1kbfVuYM91aaSVAve8YI6iIVYQ2fMIIeN7e+kxaSHq\nLF7qXG66j5/csdtIW63V4h4kegdmDmzCTcaeMHJDKQKBgQDw1JGpuBxweV9pgGUK\neCbchEhnv9ijV4d6IzM+4X8PVpEzLQu7g7qToKKnNOItcaglG/lYQPnddRQMfvEz\nApyRgGvWhsLpbMsRlr3+zZZCzH7YTAtd1YEsNu0au7H0WqMVWPazkrR1LDXCSYus\n2YDXB2rMj2lXSiki/8R84iCStwKBgQDj6CypwS0kE64MVVa4DhNlmm4fWNFi6zXk\nRz3tAVuOE6Rd54ZDfb/UKju6cDqs21yRH6o0WGhGhexkN2RpJztmQolBvlFgXgHf\nB1z4oGCTEVKMdL6Kw+pPAJMlUUvghWEr2YYQGgClniUSCDj5Sh68Kh1/OwkdI4/H\n9DB4CSEqaQKBgENzFZTWJsjthWZz+liTTDcIqYq9NXySADSZ9TlQSJjQIvyVSirr\neu7r14JDEnGt2m0CR7SLBjAbIVFaoE0sFxO9RvafaamcucckU/QwOjxdL81+htRx\n/qqWe5O4K+AHHpPVBctHdFk415mhpYf0ptwSjLvcEqHK+Hh/79UWNA9DAoGAYMwM\npDDa9laxdqWMRnIcBOxZV1EG5aeW5RTpFU+dTjPDfOrH2MSBBCDH64CdOyuUHkM/\nrCncaA+bflkUeaDjFqSt3VFzCKYEz3A2KZccTXpvAB7ZiuB5FQLefFwSCRM9WT1z\nNkWE/tKzVfxODntPoIWWr6IoVcrz1248Y88k2fkCgYEAy9gOrIe7JCnFMGaSngM6\nPW8oObhA+BHvYhSj3eaJ+neRIRAYCGGmgBIb4xD/DvSBWN2JFRt4l/u/QxzIsiHI\nLbyIedNETBZ8q8IPZ+dc7sCQimN7e6v3lBikhEJWh3nPKQ+NZqAPN56osbt9DdQE\nhpPaNaorjnWa3i2ZZ55kpks=\n-----END PRIVATE KEY-----\n";
   if (!clientEmail || !privateKeyPem) {
     throw new Error(
       "Missing GOOGLE_SERVICE_ACCOUNT_EMAIL or GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY",
@@ -137,7 +137,7 @@ async function ensureHeaderRow(
 export const submitEnquiry = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => EnquirySchema.parse(data))
   .handler(async ({ data }) => {
-    const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+    const spreadsheetId = "https://docs.google.com/spreadsheets/d/1E9MOtc3GCXpH67uTu8OpesNg2PL9sZKiLhGduYl1BOs/edit";
     if (!spreadsheetId) {
       throw new Error("Missing GOOGLE_SHEET_ID environment variable");
     }
