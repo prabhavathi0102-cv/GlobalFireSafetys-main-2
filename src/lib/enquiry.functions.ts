@@ -137,11 +137,11 @@ async function ensureHeaderRow(
 export const submitEnquiry = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => EnquirySchema.parse(data))
   .handler(async ({ data }) => {
-    const spreadsheetId = "https://docs.google.com/spreadsheets/d/1E9MOtc3GCXpH67uTu8OpesNg2PL9sZKiLhGduYl1BOs/edit";
+    const spreadsheetId = "1E9MOtc3GCXpH67uTu8OpesNg2PL9sZKiLhGduYl1BOs";
     if (!spreadsheetId) {
       throw new Error("Missing GOOGLE_SHEET_ID environment variable");
     }
-    const tab = process.env.GOOGLE_SHEET_TAB || DEFAULT_TAB;
+    const tab = "Enquiries";
 
     const accessToken = await getAccessToken();
     await ensureHeaderRow(accessToken, spreadsheetId, tab);
